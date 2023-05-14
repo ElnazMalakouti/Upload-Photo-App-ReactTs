@@ -38,6 +38,10 @@ code {
   visibility: hidden;
 }
 
+.custom-file-input{
+  background-image: url('../public/pics/profile.png');
+}
+
 @font-face {
   font-family: 'IranYekan-Reqular';
   src: url('../public/fonts/IranYekan-R.TTF');

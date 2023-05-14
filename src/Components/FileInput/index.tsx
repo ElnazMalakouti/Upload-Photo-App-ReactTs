@@ -1,27 +1,36 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { MdOutlineAddAPhoto } from 'react-icons/md'
 import Button from "../Button"
+import { Imodal } from "../../Interfaces/Imodal"
 
-const FileInput = () => {
+interface Iprops extends Imodal {
+    inputFileValue: File | undefined
+    setInputFileValue: Function
+}
 
-    const inputRef = useRef(null);
+const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileValue }: Iprops) => {
 
-    const [inputFileValue, setInputFileValue] = useState<File>()
+    const inputRef: any = useRef(null);
 
     const handleClick = () => {
-        document.getElementById('file-input-lable')?.click()
+        inputRef.current.click()
     }
+
+    useEffect(() => {
+        if (inputFileValue) {
+            setIsModalOpen(true)
+        }
+    }, [inputFileValue])
 
     return (
         <>
-            <div className="bottomShadow w-full max-w-[350px] h-[360px] p-[24px] border border-[#525252] flex flex-col justify-start items-center gap-[20px]">
+            <div className="bottomShadow w-full max-w-[350px] h-[360px] p-[24px] border border-[#525252] flex flex-col justify-start items-center gap-[20px] z-10">
 
                 <label
                     id="file-input-lable"
                     htmlFor="file-input"
-                    className={`${inputFileValue ? 'hidden' : ''} custom-file-input w-[230px] h-[230px] rounded-[50%] border-2 border-[#959595] border-dashed text-[32px] text-[#959595] flex justify-center items-center`}
+                    className={`${inputFileValue ? 'hidden' : ''} custom-file-input bg-cover w-[230px] h-[230px] rounded-[50%] border-2 border-[#959595] border-dashed text-[32px] text-[#959595] flex justify-center items-center`}
                 >
-                    <MdOutlineAddAPhoto />
                 </label>
 
                 <input
@@ -46,6 +55,7 @@ const FileInput = () => {
                 </div>
 
                 <Button
+                    variant="primary"
                     onClick={(() => handleClick())}
                     className="w-[150px]"
                 >

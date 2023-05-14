@@ -1,0 +1,10 @@
+.primary{
+    background-color: #525252;
+    border-color: #525252;
+}
+
+.secondary{
+    background-color: transparent;
+    border: 1px solid #525252;
+    color: #525252;
+}
