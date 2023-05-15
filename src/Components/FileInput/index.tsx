@@ -11,19 +11,20 @@ interface Iprops extends Imodal {
     inputRef: any
     finalImage: Blob | null
     setFinalImage: Function
-    imageShow:any
-    setImageShow:Function
+    imageShow: any
+    setImageShow: Function
 }
 
-const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileValue , inputRef , finalImage , setFinalImage , imageShow , setImageShow }: Iprops) => {
+const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileValue, inputRef, finalImage, setFinalImage, imageShow, setImageShow }: Iprops) => {
 
-    
+
+    const [croppedImageLink, setCroppedImageLink] = useState<string | null>(null)
 
     const handleClick = () => {
         inputRef.current.click()
     }
 
-    useEffect(() => {
+    useEffect(() => {        
         if (inputFileValue) {
             setIsModalOpen(true)
         }
@@ -40,7 +41,8 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
                 >
                 </label>
 
-                <input                    
+                <input
+                    ref={inputRef}
                     id='file-input'
                     type="file"
                     className={`hidden w-[200px] h-[100px] rounded-[4px]`}
@@ -49,13 +51,12 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
                     onChange={(e) => e.target.files && setInputFileValue(e.target.files[0])}
                 />
 
-                <div className={`${inputFileValue ? 'block' : imageShow ? 'block' : 'hidden'} w-[230px] h-[230px] rounded-[50%] relative`}>
+                <div className={`${inputFileValue ? 'block' : imageShow ? 'block' : 'hidden'} object-cover rounded-[50%] relative`}>
                     <img
                         title='file'
                         alt='piiic'
-                        className={`w-full h-auto object-cover align-top `}
                         src={
-                            inputFileValue ? URL.createObjectURL(inputFileValue) : imageShow
+                            croppedImageLink ?? ''
                         }
                     />
                 </div>
@@ -68,10 +69,17 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
                     آپلود عکس
                 </Button>
 
-                <EditPhotoModal inputRef={inputRef} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} inputFileValue={inputFileValue} setInputFileValue={setInputFileValue} finalImage={finalImage} setFinalImage={setFinalImage} imageShow={imageShow} setImageShow={setImageShow}/>                
+                <EditPhotoModal
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                    croppedImageLink={croppedImageLink}
+                    setCroppedImageLink={setCroppedImageLink}
+                    inputFileValue={inputFileValue}
+                    setInputFileValue={setInputFileValue}
+                />
 
             </div>
-            {console.log(`imageShow: ${imageShow}`)}
+            {console.log(inputFileValue)} 
         </>
     )
 }

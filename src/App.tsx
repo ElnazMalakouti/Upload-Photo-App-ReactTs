@@ -26,7 +26,7 @@ function App() {
 
   const [finalImage, setFinalImage] = useState<Blob | null>(null)
 
-  const [imageShow , setImageShow] = useState<any>()
+  const [imageShow, setImageShow] = useState<any>()
 
   const inputRef: any = useRef(null);
 
@@ -40,22 +40,11 @@ function App() {
           setInputFileValue={setInputFileValue}
           inputRef={inputRef}
           finalImage={finalImage}
-          setFinalImage={setFinalImage} 
-          imageShow={imageShow}
-          setImageShow={setImageShow}
-          />
-
-        <EditPhotoModal
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          inputFileValue={inputFileValue}
-          setInputFileValue={setInputFileValue}
-          inputRef={inputRef}
-          finalImage={finalImage}
           setFinalImage={setFinalImage}
           imageShow={imageShow}
           setImageShow={setImageShow}
         />
+
       </div>
     </>
   );

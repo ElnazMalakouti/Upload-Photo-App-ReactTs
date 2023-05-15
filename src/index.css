@@ -46,3 +46,9 @@ code {
   font-family: 'IranYekan-Reqular';
   src: url('../public/fonts/IranYekan-R.TTF');
 }
+
+
+.reactEasyCrop_Container{
+  width: 200px !important;
+  height: 200px !important;
+}
