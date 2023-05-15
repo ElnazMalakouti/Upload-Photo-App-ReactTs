@@ -14,7 +14,7 @@ interface props extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = ({className , variant , children , disable , ...props } : props) => {
 
     const btnClasses = classNames(
-        'h-[42px] rounded-[8px] bg-[#525252] text-white disabled:bg-[#E5E5E5] disabled:text-[#CCCCCC] disabled:border-transparent',
+        'w-[120px] h-[42px] rounded-[8px] bg-[#525252] text-white disabled:bg-[#E5E5E5] disabled:text-[#CCCCCC] disabled:border-transparent',
         variant === 'primary' ? 'primary' : 'secondary' ,
         className
     )

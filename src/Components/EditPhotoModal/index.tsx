@@ -12,9 +12,10 @@ interface Iprops extends Imodal {
     setCroppedImageLink: Function
     inputFileValue: File | undefined
     setInputFileValue: Function
+    inputRef: any
 }
 
-const EditPhotoModal = ({ isModalOpen, setIsModalOpen, croppedImageLink, setCroppedImageLink, inputFileValue , setInputFileValue }: Iprops) => {
+const EditPhotoModal = ({ isModalOpen, setIsModalOpen, croppedImageLink, setCroppedImageLink, inputFileValue, setInputFileValue, inputRef }: Iprops) => {
 
     const [crop, setCrop] = useState<Crop>()
 
@@ -22,37 +23,36 @@ const EditPhotoModal = ({ isModalOpen, setIsModalOpen, croppedImageLink, setCrop
     return (
         <>
             <div className={`${isModalOpen ? 'flex' : 'hidden'} w-full h-full justify-center items-center bg-white bg-opacity-70 fixed top-0 left-0 z-50`}>
-                <div id="wrapper-modal" className='w-[400px] h-[430px] px-[16px] py-[24px] bg-white border border-[#525252] flex flex-col justify-between items-center'>
+                <div id="wrapper-modal" className='w-[400px] h-[430px] px-[16px] py-[24px] bg-white border border-[#525252] flex flex-col !justify-between gap-[16px] items-center'>
 
+                    
+                        <CropImage                        
+                            inputFileValue={inputFileValue && URL.createObjectURL(inputFileValue)}
+                            setInputFileValue={setInputFileValue}
+                            croppedImageLink={croppedImageLink}
+                            setCroppedImageLink={setCroppedImageLink}
+                            ResultButton={
+                                <div className="w-full h-auto flex justify-end items-end gap-[16px]">
+                                    <Button
+                                        onClick={() => {
+                                            setIsModalOpen(false)
+                                            setCroppedImageLink(null)
+                                            setInputFileValue(undefined)
+                                            inputRef.current.value = ''
 
-                    <CropImage
-                        inputFileValue={inputFileValue && URL.createObjectURL(inputFileValue)}
-                        setInputFileValue={setInputFileValue}
-                        croppedImageLink={croppedImageLink}
-                        setCroppedImageLink={setCroppedImageLink}
-                        ResultButton={
-                            <div className="w-full flex justify-end items-end gap-[16px]">
-                                <Button
-                                    onClick={() => {
-                                        setIsModalOpen(false)
-                                        setCroppedImageLink(null)   
-                                        setInputFileValue(undefined)    
-                                                                         
-                                    }}
-                                    variant="secondary"
-                                    className="w-[130px]"
-                                >
-                                    کنسل
-                                </Button>
-                                <Button
-                                    onClick={() => setIsModalOpen(false)}
-                                    variant="primary"
-                                    className="w-[130px]"
-                                >
-                                    ثبت
-                                </Button>
-                            </div>}
-                    />
+                                        }}
+                                        variant="secondary"
+                                    >
+                                        کنسل
+                                    </Button>
+                                    <Button
+                                        onClick={() => setIsModalOpen(false)}
+                                        variant="primary"
+                                    >
+                                        ثبت
+                                    </Button>
+                                </div>}
+                        />                    
 
                 </div>
             </div>

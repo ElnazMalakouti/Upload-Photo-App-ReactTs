@@ -49,6 +49,6 @@ code {
 
 
 .reactEasyCrop_Container{
-  width: 200px !important;
-  height: 200px !important;
+  width: 100% !important;
+  height: 100% !important;
 }

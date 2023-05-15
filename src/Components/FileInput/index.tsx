@@ -24,7 +24,7 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
         inputRef.current.click()
     }
 
-    useEffect(() => {        
+    useEffect(() => {
         if (inputFileValue) {
             setIsModalOpen(true)
         }
@@ -51,8 +51,9 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
                     onChange={(e) => e.target.files && setInputFileValue(e.target.files[0])}
                 />
 
-                <div className={`${inputFileValue ? 'block' : imageShow ? 'block' : 'hidden'} object-cover rounded-[50%] relative`}>
+                <div className={`${inputFileValue ? 'block' : imageShow ? 'block' : 'hidden'} w-full h-full object-cover object-center rounded-[50%] relative overflow-hidden`}>
                     <img
+                        className="w-full h-full"
                         title='file'
                         alt='piiic'
                         src={
@@ -61,13 +62,25 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
                     />
                 </div>
 
-                <Button
-                    variant="primary"
-                    onClick={(() => handleClick())}
-                    className="w-[150px]"
-                >
-                    آپلود عکس
-                </Button>
+                <div className="w-full flex justify-center items-center gap-[16px]">
+                    <Button
+                        className={`${croppedImageLink ? 'block' : 'hidden'}`}
+                        variant="secondary"
+                        onClick={() => {
+                            setCroppedImageLink(null)
+                            setInputFileValue(undefined)
+                            inputRef.current.value = ''
+                        }}
+                    >
+                        حذف
+                    </Button>
+                    <Button
+                        variant="primary"
+                        onClick={(() => handleClick())}
+                    >
+                        آپلود عکس
+                    </Button>
+                </div>
 
                 <EditPhotoModal
                     isModalOpen={isModalOpen}
@@ -76,10 +89,11 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
                     setCroppedImageLink={setCroppedImageLink}
                     inputFileValue={inputFileValue}
                     setInputFileValue={setInputFileValue}
+                    inputRef={inputRef}
                 />
 
             </div>
-            {console.log(inputFileValue)} 
+            {console.log(inputFileValue)}
         </>
     )
 }

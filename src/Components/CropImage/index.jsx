@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import Cropper from 'react-easy-crop'
 
-const CropImage = ({ croppedImageLink, setCroppedImageLink, ResultButton, inputFileValue ,setInputFileValue }) => {
+const CropImage = ({ croppedImageLink, setCroppedImageLink, ResultButton, inputFileValue, setInputFileValue }) => {
     const [crop, setCrop] = useState({ x: 0, y: 0 })
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
     const [croppedImage, setCroppedImage] = useState(null)
@@ -29,19 +29,20 @@ const CropImage = ({ croppedImageLink, setCroppedImageLink, ResultButton, inputF
     return (
         <>
             {
-                !croppedImage && <div className='w-[200px] h-[200px] relative'>
+                !croppedImage && <div className='w-full h-full relative'>
                     <Cropper
                         className={'max-w-[200px]'}
                         image={inputFileValue}
                         crop={crop}
                         rotation={0}
-                        aspect={1 / 1}
+                        aspect={3/2}
                         onCropChange={setCrop}
                         onCropComplete={onCropComplete}
                     />
                 </div>
             }
             <span
+                className='w-full'
                 onClick={getFinalCroppedImageLink}
             >
                 {ResultButton}
