@@ -2,15 +2,22 @@ import { useState, useRef, useEffect } from "react"
 import { MdOutlineAddAPhoto } from 'react-icons/md'
 import Button from "../Button"
 import { Imodal } from "../../Interfaces/Imodal"
+import CropImage from "../CropImage"
+import EditPhotoModal from "../EditPhotoModal"
 
 interface Iprops extends Imodal {
     inputFileValue: File | undefined
     setInputFileValue: Function
+    inputRef: any
+    finalImage: Blob | null
+    setFinalImage: Function
+    imageShow:any
+    setImageShow:Function
 }
 
-const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileValue }: Iprops) => {
+const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileValue , inputRef , finalImage , setFinalImage , imageShow , setImageShow }: Iprops) => {
 
-    const inputRef: any = useRef(null);
+    
 
     const handleClick = () => {
         inputRef.current.click()
@@ -29,12 +36,11 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
                 <label
                     id="file-input-lable"
                     htmlFor="file-input"
-                    className={`${inputFileValue ? 'hidden' : ''} custom-file-input bg-cover w-[230px] h-[230px] rounded-[50%] border-2 border-[#959595] border-dashed text-[32px] text-[#959595] flex justify-center items-center`}
+                    className={`${inputFileValue ? 'hidden' : imageShow ? 'hidden' : ''} custom-file-input bg-cover w-[230px] h-[230px] rounded-[50%] border-2 border-[#959595] border-dashed text-[32px] text-[#959595] flex justify-center items-center`}
                 >
                 </label>
 
-                <input
-                    ref={inputRef}
+                <input                    
                     id='file-input'
                     type="file"
                     className={`hidden w-[200px] h-[100px] rounded-[4px]`}
@@ -43,13 +49,13 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
                     onChange={(e) => e.target.files && setInputFileValue(e.target.files[0])}
                 />
 
-                <div className={`${inputFileValue ? 'block' : 'hidden'} w-[230px] h-[230px] rounded-[50%] relative`}>
+                <div className={`${inputFileValue ? 'block' : imageShow ? 'block' : 'hidden'} w-[230px] h-[230px] rounded-[50%] relative`}>
                     <img
                         title='file'
                         alt='piiic'
-                        className={`w-full h-full object-cover object-cover align-top `}
+                        className={`w-full h-auto object-cover align-top `}
                         src={
-                            inputFileValue && URL.createObjectURL(inputFileValue)
+                            inputFileValue ? URL.createObjectURL(inputFileValue) : imageShow
                         }
                     />
                 </div>
@@ -62,7 +68,10 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
                     آپلود عکس
                 </Button>
 
+                <EditPhotoModal inputRef={inputRef} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} inputFileValue={inputFileValue} setInputFileValue={setInputFileValue} finalImage={finalImage} setFinalImage={setFinalImage} imageShow={imageShow} setImageShow={setImageShow}/>                
+
             </div>
+            {console.log(`imageShow: ${imageShow}`)}
         </>
     )
 }
