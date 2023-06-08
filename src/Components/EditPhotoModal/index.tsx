@@ -35,8 +35,8 @@ const EditPhotoModal = ({ isModalOpen, setIsModalOpen, croppedImageLink, setCrop
                                 <div className="w-full h-auto flex justify-end items-end gap-[16px]">
                                     <Button
                                         onClick={() => {
-                                            setIsModalOpen(false)
                                             setCroppedImageLink(null)
+                                            setIsModalOpen(false)
                                             setInputFileValue(undefined)
                                             inputRef.current.value = ''
 
@@ -55,7 +55,7 @@ const EditPhotoModal = ({ isModalOpen, setIsModalOpen, croppedImageLink, setCrop
                         />                    
 
                 </div>
-            </div>
+            </div>            
         </>
     )
 }

@@ -64,7 +64,7 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
 
                 <div className="w-full flex justify-center items-center gap-[16px]">
                     <Button
-                        className={`${croppedImageLink ? 'block' : 'hidden'}`}
+                        className={`${inputFileValue ? 'block' : 'hidden'}`}
                         variant="secondary"
                         onClick={() => {
                             setCroppedImageLink(null)
@@ -86,14 +86,13 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
                     isModalOpen={isModalOpen}
                     setIsModalOpen={setIsModalOpen}
                     croppedImageLink={croppedImageLink}
-                    setCroppedImageLink={setCroppedImageLink}
+                    setCroppedImageLink={setCroppedImageLink} 
                     inputFileValue={inputFileValue}
                     setInputFileValue={setInputFileValue}
                     inputRef={inputRef}
                 />
 
-            </div>
-            {console.log(inputFileValue)}
+            </div>      
         </>
     )
 }
