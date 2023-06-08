@@ -43,13 +43,13 @@ const EditPhotoModal = ({ isModalOpen, setIsModalOpen, croppedImageLink, setCrop
                                         }}
                                         variant="secondary"
                                     >
-                                        کنسل
+                                        cancel
                                     </Button>
                                     <Button
                                         onClick={() => setIsModalOpen(false)}
                                         variant="primary"
                                     >
-                                        ثبت
+                                        crop
                                     </Button>
                                 </div>}
                         />                    

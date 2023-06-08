@@ -72,13 +72,13 @@ const FileInput = ({ isModalOpen, setIsModalOpen, inputFileValue, setInputFileVa
                             inputRef.current.value = ''
                         }}
                     >
-                        حذف
+                        remove
                     </Button>
                     <Button
                         variant="primary"
                         onClick={(() => handleClick())}
                     >
-                        آپلود عکس
+                        Choose photo
                     </Button>
                 </div>
 
